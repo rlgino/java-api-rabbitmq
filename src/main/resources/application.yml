@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: hello-world,receiver
+
+logging:
+  level:
+    org: DEBUG
+
+tutorial:
+  client:
+    duration: 6500000
