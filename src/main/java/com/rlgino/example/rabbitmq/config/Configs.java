@@ -1,20 +1,34 @@
 package com.rlgino.example.rabbitmq.config;
 
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile({"tut1","hello-world"})
+@Profile({"tut1", "hello-world"})
 @Configuration
 @EnableRabbit
 public class Configs {
 
+    public static final String COM_RLGINO_GO_PRODUCT_CREATED = "com.rlgino.go.product_created";
+
     @Bean
-    public Queue hello() {
-        return new Queue("com.rlgino.go.product_created");
+    public Queue productCreated() {
+        return new Queue(COM_RLGINO_GO_PRODUCT_CREATED);
+    }
+
+    @Bean
+    public TopicExchange topicExchange() {
+        return new TopicExchange("logs_topic", true, false);
+    }
+
+    @Bean
+    public Binding bindingExchange(TopicExchange topicExchange,
+                                   Queue productCreated) {
+        return BindingBuilder.bind(productCreated)
+                .to(topicExchange).with("rlgino.product_creator.*");
     }
 
     @Bean

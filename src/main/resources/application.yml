@@ -4,7 +4,7 @@ spring:
 
 logging:
   level:
-    org: DEBUG
+    org: ERROR
 
 tutorial:
   client:
