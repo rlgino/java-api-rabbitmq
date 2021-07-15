@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 @EnableRabbit
 public class Configs {
 
-    public static final String COM_RLGINO_GO_PRODUCT_CREATED = "com.rlgino.go.product_created";
+    public static final String COM_RLGINO_GO_PRODUCT_CREATED = "product_notifier.notification.publish_notification_on_product_created";
 
     @Bean
     public Queue productCreated() {
